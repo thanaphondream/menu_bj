@@ -55,13 +55,13 @@ export const Login = async (req: Request, res: Response) => {
             String(codes),
             { expiresIn: "1h" }
         )
-
+        
         res.cookie("token", token, {
             httpOnly: true,
             path: "/",
             maxAge: 60 * 60 * 1000,
-            sameSite: "lax",
-            secure: false,
+            sameSite: "none",
+            secure: true,
         });
 
         return res.status(200).json({
