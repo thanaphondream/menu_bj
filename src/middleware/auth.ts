@@ -47,6 +47,7 @@ type Employee =  {
 export const  authMiddlewareCookie = async (req: Request, res: Response, next: NextFunction) => {
     try{
         const token = req.cookies.token
+        console.log("token Check 01", token)
           if (!token) {
             return res.status(402).json({ message: "No token" })
         }
@@ -58,10 +59,12 @@ export const  authMiddlewareCookie = async (req: Request, res: Response, next: N
         )as Employee
 
         const user = await ShowUserID(decoded.id)
+        console.log("Check User", user)
         if (!user) {
             return res.status(404).json({ message: "User not found" })
         };
         (req as any).user = user;
+        console.log("Check nex")
         next();
     }catch(err){
         res.status(500).json({Error: "Eroro Middlewqre 500", err: err})
