@@ -71,7 +71,7 @@ export const Cart_ItmeFin = async (req: AuthRequest, res: Response) => {
 
         return res.status(200).json({count: carts, cart: cartItem, total: total})
     }catch(err){
-        return res.status(500).json({message: "Error Status 500", err: err"})
+        return res.status(500).json({message: "Error Status 500", err: err})
     }
 }
 
