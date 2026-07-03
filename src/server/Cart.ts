@@ -77,7 +77,9 @@ export const Cart_ItmeFin = async (req: AuthRequest, res: Response) => {
 
 export const Cart_Itmecount = async (req: AuthRequest, res: Response) => {
     try{
+        console.log("Solo log", Number(req.user.id))
         const cartItem = await CartFinID(Number(req.user.id))
+        console.log("Solo log", cartItem)
         if(!cartItem){
             return res.status(402).json({message: "Error Carts not found"})
         }
@@ -85,7 +87,7 @@ export const Cart_Itmecount = async (req: AuthRequest, res: Response) => {
 
         return res.status(200).json(carts)
     }catch(err){
-        return res.status(500).json({message: "Error Status 500"})
+        return res.status(500).json({message: "Error Status 500", err: err})
     }
 }
 
