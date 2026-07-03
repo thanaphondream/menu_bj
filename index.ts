@@ -17,13 +17,8 @@ const app = express()
 
 app.use(express.json())
 
-    const allowedOrigins = [
-      "http://localhost:3000",
-      "https://your-frontend.vercel.app"
-    ];
-    
     app.use(cors({
-      origin: allowedOrigins,
+      origin: "https://dream-menu-food.vercel.app",
       credentials: true
     }));
     app.use(cookieParser())
