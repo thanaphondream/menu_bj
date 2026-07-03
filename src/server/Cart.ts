@@ -54,7 +54,7 @@ export const CartSave = async (req: AuthRequest, res: Response) => {
 
 export const Cart_ItmeFin = async (req: AuthRequest, res: Response) => {
     try{
-        cconsole.log("Solo log", req.user.id)
+        console.log("Solo log", req.user.id)
         const cartItem = await CartFinIDS(Number(req.user.id))
         if(!cartItem){
             return res.status(401).json({message: "Error Carts not found"})
