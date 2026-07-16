@@ -23,6 +23,7 @@ export interface MenuItemsModel{
     image: string;
     userId: number;
     categoryId: number;
+    images?: string[];
 }
 
 export interface categoryModel {

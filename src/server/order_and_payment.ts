@@ -3,7 +3,7 @@ import { OrderModel, OrderItemModel, PaymentModel} from "./model";
 import { OrderPost, OrderGet, OrderFindAll } from "../adapter/Order";
 import { CartFinIDS, CartAndCartitme_Delete } from "../adapter/Cart_Item";
 import { AuthRequest } from "../@types/expree"
-import { OrderItemPort } from "../adapter/Orderitme";
+import { OrderItemPort, CartItemMenuTop } from "../adapter/Orderitme";
 import { PaymentPost } from "../adapter/Payment";
 
 export const OrderSave = async(req: AuthRequest, res: Response) => {
@@ -87,6 +87,20 @@ export const OrderShowAll = async (req: AuthRequest, res: Response) => {
             return res.status(401).json({message: "Error Order not found"})
         }
         return res.status(200).json(order)
+    }catch(err){
+        return res.status(500).json({message: "Error Status 500"})
+    }
+}
+
+export const OrderTopMenu = async (req: Request, res: Response) => {
+    try{
+        const limit = Number(req.query.limit)
+        const orderItme = await CartItemMenuTop(limit)
+        if(!orderItme){
+            return res.status(401).json({message: "Error Order not found"})
+        }
+
+        return res.status(200).json(orderItme)
     }catch(err){
         return res.status(500).json({message: "Error Status 500"})
     }

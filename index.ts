@@ -17,11 +17,20 @@ const app = express()
 
 app.use(express.json())
 
+<<<<<<< HEAD
     app.use(cors({
       origin: "https://dream-menu-food.vercel.app",
       credentials: true
     }));
     app.use(cookieParser())
+=======
+    // app.use(cors({
+    // origin: "http://localhost:3000",
+    // credentials: true
+    // }))
+    // app.use(cookieParser())
+    app.use(cors())
+>>>>>>> 9ff5b31 (SAVE)
 AppDataSource
     .initialize()
     .then(() => {

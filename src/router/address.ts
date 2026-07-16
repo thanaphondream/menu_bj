@@ -1,11 +1,16 @@
 import express from 'express'
 import { AddresPost, AddressGetId, AddressGetAll_User } from '../server/addres';
-import { authMiddlewareCookie } from '../middleware/auth';
+import { authMiddleware } from '../middleware/auth';
 
 let addressrou = express.Router()
 
-addressrou.post("/address", authMiddlewareCookie, AddresPost)
-addressrou.get("/address", authMiddlewareCookie, AddressGetId)
-addressrou.get("/addressusershow", authMiddlewareCookie, AddressGetAll_User)
+addressrou.post("/address", authMiddleware, AddresPost)
+addressrou.get("/address", authMiddleware, AddressGetId)
+addressrou.get("/addressusershow", authMiddleware, AddressGetAll_User)
+
+
+// addressrou.post("/address", authMiddleware, AddresPost)
+// addressrou.get("/address", authMiddleware, AddressGetId)
+
 
 export default addressrou;

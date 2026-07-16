@@ -40,6 +40,8 @@ export class MenuItem {
     cascade: true,
   })
   images?: MenuImage[];
+
+  
 }
 
 @Entity()

@@ -55,6 +55,7 @@ export const Login = async (req: Request, res: Response) => {
             String(codes),
             { expiresIn: "1h" }
         )
+<<<<<<< HEAD
         
         res.cookie("token", token, {
             httpOnly: true,
@@ -63,6 +64,16 @@ export const Login = async (req: Request, res: Response) => {
             sameSite: "none",
             secure: true,
         });
+=======
+
+        // res.cookie("token", token, {
+        //     httpOnly: true,
+        //     path: "/",
+        //     maxAge: 60 * 60 * 1000,
+        //     sameSite: "lax",
+        //     secure: false,
+        // });
+>>>>>>> 9ff5b31 (SAVE)
 
         return res.status(200).json({
             message: "login success",

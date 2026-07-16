@@ -1,26 +1,34 @@
 import { AppDataSource } from "../repository/app_data_DB";
-import { MenuItem } from "../repository/MenuItem";
+import { MenuItem, MenuImage } from "../repository/MenuItem";
 import { MenuItemsModel } from "../server/model";
 
 
-export function MenuitemSave(menuitem: MenuItemsModel) {
-    const menuitemADS = AppDataSource.getRepository(MenuItem)
-    const menuiterCreate = menuitemADS.create({
-         name: menuitem.name,
-        description: menuitem.description || "-",
-        image: menuitem.image,
-        price: menuitem.price,
-        
+export function MenuitemSave(menu: MenuItemsModel) {
+    const repo = AppDataSource.getRepository(MenuItem)
+      const item = repo.create({
+
+        name: menu.name,
+
+        description: menu.description,
+
+        price: menu.price,
+
+        image: menu.image,
+
         user: {
-            id: menuitem.userId
+            id: menu.userId
         },
 
         category: {
-            id: menuitem.categoryId
-        }
-    })
+            id: menu.categoryId
+        },
 
-    return menuitemADS.save(menuiterCreate)
+        images: menu.images?.map(url => ({
+            imageUrl: url
+        }))
+    });
+
+    return repo.save(item)
 }
 
 
@@ -31,14 +39,19 @@ export function MenuItemShows() {
 
 export function MenuItemShowDataID(id: Number) {
     const menuitemADS = AppDataSource.getRepository(MenuItem)
-    return menuitemADS.findOne({where: {id: Number(id)}})
+    return menuitemADS.findOne({
+        where: {id: Number(id)},
+        relations: {
+            images: true
+        }
+    })
 }
 
-export function MenuItemUpdates(menu: MenuItemsModel, menunew: MenuItemsModel) {
-    const menuitemADS = AppDataSource.getRepository(MenuItem)
-    const menuitemMerge = menuitemADS.merge(menu, menunew)
-    return menuitemADS.save(menuitemMerge)
-}
+// export function MenuItemUpdates(menu: MenuItemsModel, menunew: MenuItemsModel) {
+//     const menuitemADS = AppDataSource.getRepository(MenuItem)
+//     const menuitemMerge = menuitemADS.merge(menu, menunew)
+//     return menuitemADS.save(menuitemMerge)
+// }
 
 export function MenuItemNew() {
     const menuitemADS = AppDataSource.getRepository(MenuItem)
@@ -48,4 +61,26 @@ export function MenuItemNew() {
         },
         take: 10
     })
+}
+
+
+export function MenutemTopNew(skip: number, limit: number) {
+    const menuitemADS = AppDataSource.getRepository(MenuItem)
+    return menuitemADS.findAndCount({
+            skip,
+            take: limit,
+            order: {
+                id: "DESC"
+            }
+        })
+}
+
+export function MenutemImgSave(img: string, id: number){
+    const menuitemADS = AppDataSource.getRepository(MenuImage)
+    const ImgMenuCreate = menuitemADS.create({
+        imageUrl: img,
+        menu: {id: Number(id)}
+    })
+
+    return menuitemADS.save(ImgMenuCreate)
 }
