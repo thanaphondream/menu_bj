@@ -36,6 +36,13 @@ export class Address {
   @Column()
   description?: string
 
+  @Column({
+    type: "boolean",
+    default: false,
+  })
+  
+  status?: boolean
+
   @ManyToOne(() => User, (user) => user.addresses)
   user?: User
 }

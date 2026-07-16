@@ -40,6 +40,7 @@ export interface AddressModel {
     lat: string;
     lng: string;
     description: string;
+    status?: boolean;
     user?: UserModel;
 }
 

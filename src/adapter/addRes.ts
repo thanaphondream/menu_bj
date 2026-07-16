@@ -17,7 +17,8 @@ export function AddressSave(address: AddressModel) {
         distance: address.distance,
         user:{
             id: Number(address.user?.id)
-        }
+        },
+        status: true,
     })
 
     return addressADS.save(addressCreate)
@@ -28,8 +29,20 @@ export function AddressGetID(userId: Number){
         where: {
             user: {
                 id: Number(userId)
-            }
-        },relations: {user: true}
+            },
+            status: true
+        },relations: {user: true},
+    })
+}
+
+export function AddressGetIDStatus(userId: Number){
+    return addressADS.findOne({
+        where: {
+            user: {
+                id: Number(userId)
+            },
+            status: true
+        }
     })
 }
 
@@ -54,4 +67,12 @@ export function AddressCheckData(address: AddressModel){
 export function UpdateAddress(address: AddressModel, addressnew: AddressModel){
     const merge = addressADS.merge(address, addressnew)
     return addressADS.save(merge)
+}
+
+export function AddressShowAll_ThisUser(userId: number){
+    return addressADS.find({
+        where: {
+            user: {id: userId}
+        }
+    })
 }
