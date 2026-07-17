@@ -18,11 +18,11 @@ const app = express()
 app.use(express.json())
 
 
-    app.use(cors({
-      origin: "https://dream-menu-food.vercel.app",
-      credentials: true
-    }));
-    app.use(cookieParser())
+    // app.use(cors({
+    //   origin: "https://dream-menu-food.vercel.app",
+    //   credentials: true
+    // }));
+    // app.use(cookieParser())
 
     // app.use(cors({
     // origin: "http://localhost:3000",
