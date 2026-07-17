@@ -73,6 +73,10 @@ export function AddressShowAll_ThisUser(userId: number){
     return addressADS.find({
         where: {
             user: {id: userId}
+        },
+         order: {
+            status: "DESC", 
+            id: "ASC"       
         }
     })
 }

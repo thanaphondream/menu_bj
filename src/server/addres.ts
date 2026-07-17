@@ -106,7 +106,7 @@ export const AddressGetId = async (req: AuthRequest, res: Response) => {
 export const AddressGetAll_User = async (req: AuthRequest, res: Response) => {
     try{
         const userId = Number(req.user.id)
-        const addres = await AddressShowAll_ThisUser(userId)
+        const addres: any = await AddressShowAll_ThisUser(userId)
         if(!addres){
             return res.status(401).json({message: "Erorr not fount Address"})
         }
